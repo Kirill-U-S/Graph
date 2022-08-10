@@ -12,7 +12,7 @@ namespace Graph
     class a_cycles
     {
 		public int dfs_cut(int nach, int v, int N, int path_dlina, List<List<int>> arr)
-		{
+		{ 
 			path_dlina++;
 			for (int u = 0; u < N; u++)
 			{
