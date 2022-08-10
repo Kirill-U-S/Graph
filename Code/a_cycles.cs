@@ -25,7 +25,7 @@ namespace Graph
 						List<int> g = new List<int>(N) { 0 };
 						//-------------
 						for (int i = 0; i < N; i++)
-							copy.Add(g);
+							copy = copy.Append(g).ToList();
 
 						for (int i = 0; i < N; i++)
 							for (int j = 0; j < N; j++)
@@ -49,7 +49,7 @@ namespace Graph
 
 		void dfs(int u, List<List<int>> arr, List<int> path, ref List<bool> versh, ref int dlina, ref List<List<int>> arrpath, int N)
 		{
-			path.Add(u);  //вершина с которой мы работаем, т е нулевая
+			path = path.Append(u).ToList();  //вершина с которой мы работаем, т е нулевая
 			dlina++;
 			versh[u] = true;
 
@@ -63,14 +63,14 @@ namespace Graph
 					}
 					else if (v == path[0] && dlina > 2)
 					{    //используем начальную вершинку и чтобы мы не ходили по одному и тому же ребру(т е вершин задействовано больше двух)
-						path.Add(v);     //добавляем начальную вершину снова
-						arrpath.Add(path);  //весь путь добавляем к вектору arrpath
-						path.Remove(path.Count - 1);       //удаляем только что найденный путь
+						path = path.Append(v).ToList();     //добавляем начальную вершину снова
+						arrpath = arrpath.Append(path).ToList();   //весь путь добавляем к вектору arrpath
+						path.RemoveAt(path.Count - 1);       //удаляем только что найденный путь
 					}
 				}
 			}
 
-			path.Remove(path.Count - 1);  //вышли из цикла так как не можем больше никуда пойти(вершины не могут повторяться), поэтому удаляем
+			path.RemoveAt(path.Count - 1);  //вышли из цикла так как не можем больше никуда пойти(вершины не могут повторяться), поэтому удаляем
 			dlina--;
 			versh[u] = false;
 		}
@@ -81,18 +81,28 @@ namespace Graph
 			int dlina = 0;
 
 			List<List<int>> arrpath = new List<List<int>>();
-
-			List<int> b = Enumerable.Repeat(0, N).ToList();
-			List<List<int>> arr = Enumerable.Repeat(b, N).ToList();
+			List<List<int>> arr = new List<List<int>>(); ;
 			List<bool> versh = Enumerable.Repeat(false, N).ToList();
 			
 			List<int> path = new List<int>();
 
-			#region копирование
-			/*-копирование изначального массива А-*/
+            #region копирование
+            /*-копирование изначального массива А-*/
+
+            /*-инициализация-*/
+			for (int i = 0; i < N; i++)
+            {
+				List<int> b = new List<int>();
+				for (int j = 0; j < N; j++)
+					b = b.Append(0).ToList();
+				arr = arr.Append(b).ToList();
+            }
+			/*---------------*/
+
 			for (int i = 0; i < N; i++)
 				for (int j = 0; j < N; j++)
-					arr[i][j] = g.A[i][j];
+                    arr[i][j] = g.A[i][j];
+
             /*------------------------------------*/
             #endregion
 
@@ -116,7 +126,7 @@ namespace Graph
             /*--------------------*/
             #endregion
 
-			/*-алгоритм-*/
+            /*-алгоритм-*/
             for (int i = 0; i < N; i++)
 				dfs(i, arr, path, ref versh, ref dlina, ref arrpath, N);
 			/*----------*/
@@ -124,30 +134,31 @@ namespace Graph
 			/*-буферный массив-*/
 			List<List<List<int>>> buf = new List<List<List<int>>>();
 
-			/*-сортировка по размеру циклов-*/
-			for (int i = 0; i < arrpath.Count() - 1; i++)
-			{
-				for (int j = 0; j < arrpath.Count() - i - 1; j++)
-				{
-					if (arrpath[j].Count() > arrpath[j + 1].Count())
-					{
-						var bb = arrpath[j];
+            /*-сортировка по размеру циклов-*/
+            for (int i = 0; i < arrpath.Count() - 1; i++)
+            {
+                for (int j = 0; j < arrpath.Count() - i - 1; j++)
+                {
+                    if (arrpath[j].Count() > arrpath[j + 1].Count())
+                    {
+						var bb = arrpath[j + 1];
 						arrpath[j] = arrpath[j + 1];
 						arrpath[j + 1] = bb;
-					}
-				}
-			}
+                    }
+                }
+            }
 			/*------------------------------*/
 
 			/*-добавление имеющегося массива циклов-*/
+			//buf = buf.Append(arrpath).ToList();
 			buf.Add(arrpath);
-            /*--------------------------------------*/
+			/*--------------------------------------*/
 
 			#region некоторое преобразование к удобному виду
             for (int i = 0; i < buf[0].Count(); i++)
 			{
 				/*-отрезание концов-*/
-				buf[0][i].Remove(buf[0][i].Count() - 1);
+				buf[0][i].RemoveAt(buf[0][i].Count() - 1);
 
 				/*-сортировка путей векторов-*/
 				//sort(buf[0][i].begin(), buf[0][i].end());
@@ -187,8 +198,9 @@ namespace Graph
 						output += buf[0][i][j] + " ";
 				}
 
-				if (buf[0][i][0] != -1)
-					output += buf[0][i][0] + "\n";
+				if(buf[0][i].Count > 0)
+					if (buf[0][i][0] != -1)
+						output += buf[0][i][0] + "\n";
 			}
 
 			return output;

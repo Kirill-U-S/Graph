@@ -32,10 +32,10 @@ namespace Graph
         }
         void Example()
         {
-            var N = 5;
+            var N = 4;
             var A = new List<List<int>>();
-            string a = "0 1 0 1 0  1 0 1 0 0  0 1 0 1 1  1 0 1 0 1  0 0 1 1 0";
-
+            //string a = "0 1 0 1 0  1 0 1 0 0  0 1 0 1 1  1 0 1 0 1  0 0 1 1 0";
+            string a = "0 1 1 0  1 0 1 1  1 1 0 1  0 1 1 0";//пример для дейкстры
             //----------
             Graph g = new Graph(N, a);
 
