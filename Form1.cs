@@ -16,5 +16,36 @@ namespace Graph
         {
             InitializeComponent();
         }
+        void Print(int N, List<List<int>> A)
+        {
+            string str = "";
+            for (int i = 0; i < N; i++)
+            {
+                for (int j = 0; j < N; j++)
+                {
+                    str += A[i][j] + " ";
+                }
+                str += "\n";
+            }
+
+            cmd.Text = str;
+        }
+        void Example()
+        {
+            var N = 5;
+            var A = new List<List<int>>();
+            string a = "0 1 0 1 0  1 0 1 0 0  0 1 0 1 1  1 0 1 0 1  0 0 1 1 0";
+
+            //----------
+            Graph g = new Graph(N, a);
+
+            cmd.Text = g.a_cycles();
+            //----------
+
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Example();
+        }
     }
 }
