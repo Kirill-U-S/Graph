@@ -36,15 +36,9 @@ namespace Graph
 			{
 				// for(int i = 0; i < path.size(); i++)
 				// cout<<path[i]<< " ";
-
-				arrpath.Add(path);
-				arrpath.Add(weigth_path);
+				arrpath = arrpath.Append(path).ToList();
+				arrpath = arrpath.Append(weigth_path).ToList();
 			}
-
-			/*-удаление путей - шаг назад-*/
-			versh[v] = false;
-			path.Remove(path.Count() - 1);
-			weigth_path.Remove(weigth_path.Count() - 1);
 		}
 
         #region пример

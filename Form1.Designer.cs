@@ -46,7 +46,7 @@ namespace Graph
             // cmd
             // 
             this.cmd.AutoSize = true;
-            this.cmd.Location = new System.Drawing.Point(316, 147);
+            this.cmd.Location = new System.Drawing.Point(300, 9);
             this.cmd.Name = "cmd";
             this.cmd.Size = new System.Drawing.Size(35, 13);
             this.cmd.TabIndex = 1;

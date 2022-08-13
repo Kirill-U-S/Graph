@@ -33,12 +33,19 @@ namespace Graph
             int min = int.MaxValue;
             List<int> minn = new List<int>();
             List<int> versh = new List<int>();
+            List<List<int>> vert = new List<List<int>>();
             List<List<int>> buf = new List<List<int>>();
             //--------
-
-            var b = Enumerable.Repeat(0, N).ToList();
-            var vert = Enumerable.Repeat(b, N).ToList();
-
+            #region-инициализация-
+            for (int i = 0; i < N; i++)
+            {
+                List<int> b = new List<int>();
+                for (int j = 0; j < N; j++)
+                    b = b.Append(0).ToList();
+                vert = vert.Append(b).ToList();
+            }
+            #endregion
+            #region-копирование-
             for (int i = 0; i<N; i++) {
                 for (int j = i; j<N; j++) {
                     if (g.A[i][j] > 0) {
@@ -47,7 +54,7 @@ namespace Graph
                     }
                 }
             }
-
+            #endregion
             minn.Sort();
 
             for (int z = 0; z < minn.Count(); z++)
@@ -59,16 +66,6 @@ namespace Graph
                         if (minn[z] == g.A[i][j])
                         {
                             #region проверка/старые примеры/др
-                            /*for (int k = 0; k < N; k++) {
-                                int degr = 0;
-                                for (int f = k; f < N; f++)
-                                    if (vert[k][f])
-                                        degr += 1;
-                                if (degr > 0 && degr < 3) {
-                                    t = false;
-                                    break;
-                                }
-                            }*///проверка на циклы(-)
                             vert[i][j] = vert[j][i] = minn[z];
                             int flag = 0;
                             int gf = 0;

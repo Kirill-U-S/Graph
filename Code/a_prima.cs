@@ -13,28 +13,28 @@ namespace Graph
             int N = g.A.Count;
             string output = "";
             List<bool> versh = new List<bool>();
-            
-            var buf = Enumerable.Repeat(0, N).ToList();
-            var arr = Enumerable.Repeat(buf, N).ToList();
+            List<List<int>> arr = new List<List<int>>();
+            List<List<int>> smezh = new List<List<int>>();
 
-            /*копирование изначального массива А*/
-            buf = Enumerable.Repeat(0, N).ToList();
-            var smezh = Enumerable.Repeat(buf, N).ToList();
-            buf.Clear();
-            /*----------------------------------*/
-
-            //массивы arr and versh должны быть полностью в нулях
+            #region-инициализация-
             for (int i = 0; i < N; i++)
             {
+                List<int> buf = new List<int>();
                 for (int j = 0; j < N; j++)
-                {
-                    smezh[i][j] = g.A[i][j];
-                    arr[i][j] = 0;
-                }
-                versh[i] = false;
-            }
-            versh[0] = true;
+                    buf = buf.Append(0).ToList();
 
+                arr = arr.Append(buf).ToList();
+                smezh = smezh.Append(buf).ToList();
+                versh = versh.Append(false).ToList();
+            }
+            #endregion
+            #region-копирование-
+            for (int i = 0; i < N; i++)
+                for (int j = 0; j < N; j++)
+                    smezh[i][j] = g.A[i][j];
+            #endregion
+
+            versh[0] = true;
             int y = 0, x = 0, sum = 0, k = 0;
             #region сам алгоритм
             while (k++ < N - 1)
