@@ -15,10 +15,9 @@ namespace Graph
 			bool flag = false;
 
 			List<List<int>> arrpath = new List<List<int>>();
-			List<List<int>> arr = new List<List<int>>(); ;
-			List<bool> versh = Enumerable.Repeat(false, N).ToList();
-
+			List<List<int>> arr = new List<List<int>>();
 			List<int> path = new List<int>();
+			List<bool> versh = new List<bool>();
 
 			#region копирование
 			/*-копирование изначального массива ј-*/
@@ -32,6 +31,10 @@ namespace Graph
 				arr = arr.Append(b).ToList();
 			}
 			/*---------------*/
+			for (int i = 0; i < N; i++)
+			{
+				versh = versh.Append(false).ToList();
+			}
 
 			for (int i = 0; i < N; i++)
 				for (int j = 0; j < N; j++)
@@ -53,7 +56,7 @@ namespace Graph
 
 			/*-алгоритм-*/
 			for (int i = 0; i < N; i++)
-				dfs(i, arr, path, ref versh, ref dlina, ref arrpath, N); //эта функци€ работает, если не объ€влена тут?
+				dfs(i, arr, path, ref versh, ref dlina, ref arrpath, N);  //эта функци€ работает, если не объ€влена тут?
 			/*----------*/
 
 			/*-буферный массив-*/
