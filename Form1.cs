@@ -16,29 +16,42 @@ namespace Graph
         {
             InitializeComponent();
         }
-        void Print(int N, List<List<int>> A)
+        void Print(Graph g, string zn)
         {
+            int N = g.A.Count;
             string str = "";
-            for (int i = 0; i < N; i++)
+
+            if (zn == "A")
             {
-                for (int j = 0; j < N; j++)
+                for (int i = 0; i < N; i++)
                 {
-                    str += A[i][j] + " ";
+                    for (int j = 0; j < N; j++)
+                    {
+                        str += g.A[i][j] + " ";
+                    }
+                    str += "\n";
                 }
-                str += "\n";
+            }
+            else if (zn == "E")
+            {
+                for (int i = 0; i < N; i++)
+                {
+                    str += $"ребро {i}, м/у {g.E[i][0]} - {g.E[i][1]}, значение {g.A[int.Parse(g.E[i][0].ToString())][int.Parse(g.E[i][1].ToString())]}\n";
+                }
             }
 
             cmd.Text = str;
         }
         void Example()
         {
-            var N = 5;
             var A = new List<List<int>>();
-            string a = "0 1 0 1 0  1 0 1 0 0  0 1 0 1 1  1 0 1 0 1  0 0 1 1 0";
-            //string a = "0 1 1 0  1 0 1 1  1 1 0 1  0 1 1 0";//пример для дейкстры
+            //string a = "0 1 0 1 0  1 0 1 0 0  0 1 0 1 1  1 0 1 0 1  0 0 1 1 0";
+            //int N = 5;
+            string a = "0 1 1 0  1 0 1 1  1 1 0 1  0 1 1 0";//пример для дейкстры
+            int N = 4;
             //----------
             Graph g = new Graph(N, a);
-
+            Print(g, "E");
             cmd.Text = g.a_cycles();
             //----------
 

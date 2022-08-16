@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Graph
 {
     class a_cycles
-    {
+    {//TODO: к dfs и bfs надо будет разработать нормальный интерфейс взаимодействия
 		public int dfs_cut(int nach, int v, int N, int path_dlina, List<List<int>> arr)
 		{ 
 			path_dlina++;
@@ -53,30 +53,48 @@ namespace Graph
 			return 0;
 		}
 
-        void dfs(int u, List<List<int>> arr, List<int> path, ref List<bool> versh, ref int dlina, ref List<List<int>> arrpath, int N)
+        void dfs(int u, List<List<int>> arr, List<int> path, List<bool> versh, int dlina, ref List<List<int>> arrpath, int N)
         {
-            path = path.Append(u).ToList();  //вершина с которой мы работаем, т е нулевая
+            path = path.Append(u).ToList();  //вершина с которой мы работаем
             dlina++;
             versh[u] = true;
 
             for (int v = 0; v < N; v++)
             {
                 if (arr[u][v] > 0)
-                {     //если между вершинами есть ребро
-                    if (v != path[0] && !versh[v])
-                    {  //вершинку мы сравниваем с начальной вершиной пути(см 76 строка) и чтобы versh был не равен тру
-                        dfs(v, arr, path, ref versh, ref dlina, ref arrpath, N);
-                    }
-                    else if (v == path[0] && dlina > 2)
-                    {    //используем начальную вершинку и чтобы мы не ходили по одному и тому же ребру(т е вершин задействовано больше двух)
-                        arrpath = arrpath.Append(path).ToList();   //весь путь добавляем к вектору arrpath
-                    }
+                {//если между вершинами есть ребро
+					if (v != path[0] && !versh[v])//вершинку мы сравниваем с начальной вершиной пути(см 76 строка) и чтобы versh был не равен тру
+						dfs(v, arr, path, versh, dlina, ref arrpath, N);
+					else if (v == path[0] && dlina > 2)//используем начальную вершинку и чтобы мы не ходили по одному и тому же ребру(т е вершин задействовано больше двух)
+						arrpath = arrpath.Append(path).ToList();   //весь путь добавляем к вектору arrpath
                 }
             }
-            dlina--;
             versh[u] = false;
         }
+        #region нерабочий бфс
+        /*---бфс на данный момент нерабочий, но я его оставляю, если он тебе будет интересен---*/
+        void bfs(int N, int u, int dlina, Dictionary<int, bool> edges, Dictionary<int, string> E, List<List<int>> arr, List<int> path, ref List<List<int>> arrpath)
+		{
+			path = path.Append(u).ToList();  //вершина с которой мы работаем
+			dlina++;
 
+			for (int v = 0; v < arr.Count; v++)
+			{
+				if (arr[u][v] > 0)
+				{
+					if (E.ContainsKey(u * N + v) && !edges.ContainsKey(u * N + v) && v != path[0])
+					{
+						edges.Add(u * N + v, true);
+						bfs(N, v, dlina, edges, E, arr, path, ref arrpath);
+						edges.Remove(u * N + v);
+					}
+					else if (v == path[0] && dlina > 2)
+						arrpath = arrpath.Append(path).ToList();
+				}
+			}
+		}
+        /*---*/
+        #endregion
         public string find_cycles(Graph g)
 		{
 			int N = g.A.Count();
@@ -128,7 +146,7 @@ namespace Graph
 
             /*-алгоритм-*/
             for (int i = 0; i < N; i++)
-				dfs(i, arr, path, ref versh, ref dlina, ref arrpath, N);
+				dfs(i, arr, path, versh, dlina, ref arrpath, N);
 			/*----------*/
 
 			/*-буферный массив-*/
