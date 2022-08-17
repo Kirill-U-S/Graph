@@ -45,14 +45,22 @@ namespace Graph
         void Example()
         {
             var A = new List<List<int>>();
-            //string a = "0 1 0 1 0  1 0 1 0 0  0 1 0 1 1  1 0 1 0 1  0 0 1 1 0";
+            #region примеры
+            //string a = " 0 1 0 1 0  1 0 1 0 0  0 1 0 1 1  1 0 1 0 1  0 0 1 1 0 ";
             //int N = 5;
-            string a = "0 1 1 0  1 0 1 1  1 1 0 1  0 1 1 0";//пример для дейкстры
+            //пример для дейкстры
+            string a = " 0 1 1 0  1 0 1 1  1 1 0 1  0 1 1 0 ";
             int N = 4;
+            //пример для краскала
+            //int N = 10;
+            //string a = " 0 10 0 0 20 0 0 15 0 0  10 0 5 0 0 0 0 2 8 9  0 5 0 16 0 0 0 0 4 0  0 0 16 0 28 25 0 0 11 9  20 0 0 28 0 15 0 0 0 0  0 0 0 25 15 0 10 0 7 5  0 0 0 0 0 10 0 11 0 3  15 2 0 0 0 0 11 0 4 14  0 8 4 11 0 7 0 4 0 0  0 9 0 9 0 5 3 14 0 0 ";
+            #endregion
             //----------
             Graph g = new Graph(N, a);
-            Print(g, "E");
-            cmd.Text = g.a_cycles();
+            Print(g, "A");
+            cmd.Text += g.a_dijkstra();
+            //cmd.Text += g.a_kraskala();
+            //cmd.Text = g.a_cycles();
             //----------
 
         }

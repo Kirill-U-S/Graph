@@ -15,16 +15,47 @@ namespace Graph
 		/*задание через матрицу инцидентности*/
 		public Graph(int V, string str)
 		{
-			str = str.Replace(" ", "");
 			A = new List<List<int>>();
 			E = new List<string>();
-			for (int i = 0; i < V; i++)
-			{
-				var buf = Enumerable.Repeat(0, V).ToList();
-				for (int j = 0; j < V; j++)
-					buf[j] = int.Parse(str[i * V + j].ToString());
+            for (int k = 0; k < V; k++)
+            {
+				List<int> _buf = new List<int>();
+				for (int i = 0; i < V; i++)
+				{
+					_buf.Add(0);
+				}
+				A.Add(_buf);
+            }
+            {
+				int y = 0;
+				List<int> buf = new List<int>();
+				for (int i = 0; i < str.Length; i++)
+				{
+					if(str[i] == ' ')
+					{
+						string buf_str = "";
+						for (int k = i+1; k < str.Length; k++)
+						{
+							if (str[k] != ' ')
+								buf_str += str[k];
+							else
+								break;
+						}
 
-				A.Add(buf);
+						if(buf_str.Length > 0)
+						{
+							buf.Add(int.Parse(buf_str));
+						}
+						if(buf.Count == V)
+						{
+							for (int k = 0; k < V; k++)
+								A[y][k] = buf[k];
+							buf.Clear();
+							y++;
+						}
+					}
+				}
+
 			}
 			/*добавление Edges|массив Е здесь выступает просто как массив строк*/
 			for (int i = 0; i < V; i++)

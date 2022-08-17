@@ -26,10 +26,12 @@ namespace Graph
             //    { 0,8,4,11,0,7,0,4,0,0},
             //    { 0,9,0,9,0,5,3,14,0,0}
             //};
+            //string smezh = "0 10 0 0 20 0 0 15 0 0  10 0 5 0 0 0 0 2 8 9  0 5 0 16 0 0 0 0 4 0  0 0 16 0 28 25 0 0 11 9  20 0 0 28 0 15 0 0 0 0
+            //                0 0 0 25 15 0 10 0 7 5  0 0 0 0 0 10 0 11 0 3  15 2 0 0 0 0 11 0 4 14  0 8 4 11 0 7 0 4 0 0  0 9 0 9 0 5 3 14 0 0 "
             #endregion
             //создание
             string output = "";
-            int sum = 0, vertices = 0;
+            int sum = 0;
             int min = int.MaxValue;
             List<int> minn = new List<int>();
             List<int> versh = new List<int>();
@@ -65,29 +67,31 @@ namespace Graph
                     {
                         if (minn[z] == g.A[i][j])
                         {
-                            #region проверка/старые примеры/др
+                            #region проверка
                             vert[i][j] = vert[j][i] = minn[z];
-                            int flag = 0;
                             int gf = 0;
                             /*поиск циклов через обрезанный поиск*/
                             for (int r = 0; r < N; r++)
                             {
-                                flag = 0;
+                                int flag = 0;
                                 int y = 0;
                                 /*проверка на единичную вершину*/
                                 for (int h = 0; h < N; h++)
                                     if (vert[r][h] != 0)
                                         y++;
                                 /*-----------------------------*/
-
+                                //проверка на наличие цикла
                                 if (y != 1)
                                 {
                                     a_cycles cyc = new a_cycles();
                                     flag = cyc.dfs_cut(i, i, N, 0, vert);
                                 }
-
+                                //-1 - если цикл есть
                                 if (flag == -1)
+                                {
                                     gf += flag;
+                                    break;
+                                }
                             }
                             /*-----------------------------------*/
                             #endregion
@@ -98,16 +102,16 @@ namespace Graph
                             {
                                 List<int> ver = new List<int>();
                                 bool fl = true;
-                                ver.Add(i);
-                                ver.Add(j);
+                                ver = ver.Append(i).ToList();
+                                ver = ver.Append(j).ToList();
                                 for (int k = 0; k < buf.Count(); k++)
-                                    if (buf[k][0] == versh[0] && buf[k][1] == versh[1])
+                                    if (buf[k][0] == ver[0] && buf[k][1] == ver[1])
                                         fl = false;
                                 if (fl)
                                 {
                                     sum += minn[z];
                                     output += $"{i} - {j} Weight: {minn[z]}. Interim amount: {sum}\n";
-                                    buf.Add(versh);
+                                    buf.Add(ver);
                                 }
                             }
                         }
