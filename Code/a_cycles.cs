@@ -73,7 +73,7 @@ namespace Graph
                     }
                 }
             }
-            dlina--;
+			dlina--;
             versh[u] = false;
         }
 

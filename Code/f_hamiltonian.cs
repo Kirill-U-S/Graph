@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Graph
 {
-    class o_hamiltonian
-    {
+	class f_hamiltonian
+	{
 		public string hamiltonian(Graph g)
 		{
 			int N = g.A.Count();
@@ -56,41 +56,27 @@ namespace Graph
 
 			/*-алгоритм-*/
 			for (int i = 0; i < N; i++)
-				dfs(i, arr, path, ref versh, ref dlina, ref arrpath, N);  //эта функци€ работает, если не объ€влена тут?
+			{
+				a_cycles humm = new a_cycles();
+				humm.dfs(i, arr, path, ref versh, ref dlina, ref arrpath, N);
+			}
 			/*----------*/
-
-			/*-буферный массив-*/
-			List<List<List<int>>> buf = new List<List<List<int>>>();
-
-			/*-добавление имеющегос€ массива циклов-*/
-			//buf = buf.Append(arrpath).ToList();
-			buf.Add(arrpath);
-			/*--------------------------------------*/
-			/*-отрезание концов-*/
-			for (int i = 0; i < buf[0].Count(); i++)
-				buf[0][i].RemoveAt(buf[0][i].Count() - 1);
 
 			/*-вывод-*/
 			string output = "";
-			for (int i = 0; i < buf[0].Count(); i++)
+			for (int i = 0; i < arrpath.Count(); i++)
 			{
-				for (int j = 0; j < buf[0][i].Count(); j++)
-				{
-					if (buf[0][i][j] == -1)
-						break;
-					else
-						gam++;
-				}
-				if (gam == N)
-				{
+				if (arrpath[i].Count() == N)
+                {
 					flag = true;
 					break;
-				}
+                }
+					
 			}
 			if (flag)
-				output = "graph is hamiltonian";
+				output += "graph is hamiltonian";
 			else
-				output = "graph is not hamiltonian";
+				output += "graph is not hamiltonian";
 			return output;
 		}
 	}

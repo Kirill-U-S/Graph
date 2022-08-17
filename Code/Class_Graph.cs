@@ -96,6 +96,16 @@ namespace Graph
 			a_kraskala kr = new a_kraskala();
 			return kr.a_kraskal(this);
         }
+		public string f_hamiltonian()
+		{
+			f_hamiltonian ham = new f_hamiltonian();
+			return ham.hamiltonian(this);
+		}
+		public string f_complete_graph()
+		{
+			f_complete_graph com = new f_complete_graph();
+			return com.complete(this);
+		}
 		public string a_prima()
         {
 			a_prima prim = new a_prima();

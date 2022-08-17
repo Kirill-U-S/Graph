@@ -51,6 +51,8 @@
     <Compile Include="Code\a_kraskala.cs" />
     <Compile Include="Code\a_prima.cs" />
     <Compile Include="Code\Class_Graph.cs" />
+    <Compile Include="Code\f_complete_graph.cs" />
+    <Compile Include="Code\f_hamiltonian.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
