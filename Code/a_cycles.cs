@@ -99,34 +99,20 @@ namespace Graph
 		}
         /*---*/
         #endregion
-        public string find_cycles(Graph g)
+        public string to_dfs(Graph g)
 		{
 			int N = g.A.Count();
 			int dlina = 0;
 
 			List<List<int>> arrpath = new List<List<int>>();
-			List<List<int>> arr = new List<List<int>>();
 			List<int> path = new List<int>();
 			List<bool> versh = new List<bool>();
 			#region инициализация
-			for (int i = 0; i < N; i++)
-			{
-				List<int> b = new List<int>();
-				for (int j = 0; j < N; j++)
-					b = b.Append(0).ToList();
-				arr = arr.Append(b).ToList();
-			}
-
             for (int i = 0; i < N; i++)
             {
 				versh = versh.Append(false).ToList();
             }
 			#endregion
-			/*-копирование изначального массива А-*/
-            for (int i = 0; i < N; i++)
-				for (int j = 0; j < N; j++)
-					arr[i][j] = g.A[i][j];
-            /*------------------------------------*/
 
             #region пример
             /*-работающие примеры-*/
@@ -150,7 +136,7 @@ namespace Graph
 
             /*-алгоритм-*/
             for (int i = 0; i < N; i++)
-				dfs(i, arr, path, versh, dlina, ref arrpath, N);
+				dfs(i, g.A, path, versh, dlina, ref arrpath, N);
 			/*----------*/
 
 			/*-буферный массив-*/

@@ -12,18 +12,41 @@ namespace Graph
         public List<List<int>> D { get; set; }
         public List<string> E { get; set; }
 
-		/*задание через матрицу инцидентности*/
+		/*---стандартный конструктор---*/
+		public Graph()
+        {
+			A = new List<List<int>>();
+			E = new List<string>();
+			D = new List<List<int>>();
+		}
+		/*---конструктор создающий граф с нулевой таблицей смежности и т.д.---*/
+		public Graph(int V)
+        {
+			A = new List<List<int>>();
+			E = new List<string>();
+			D = new List<List<int>>();
+            for (int i = 0; i < V; i++)
+            {
+				List<int> _buf = new List<int>();
+				for (int j = 0; j < V; j++)
+					_buf.Add(0);
+
+				A.Add(_buf);
+			}
+		}
+
+		/*---задание через матрицу инцидентности---*/
 		public Graph(int V, string str)
 		{
 			A = new List<List<int>>();
 			E = new List<string>();
+			D = new List<List<int>>();
             for (int k = 0; k < V; k++)
             {
 				List<int> _buf = new List<int>();
 				for (int i = 0; i < V; i++)
-				{
 					_buf.Add(0);
-				}
+
 				A.Add(_buf);
             }
             {
@@ -136,7 +159,7 @@ namespace Graph
 		public string a_cycles()
         {
 			a_cycles cycle = new a_cycles();
-			return cycle.find_cycles(this);
+			return cycle.to_dfs(this);
         }
         public int a_cycles_cut(int nach, int v, int N, int path_dlina, List<List<int>> arr)
         {
@@ -186,5 +209,30 @@ namespace Graph
 			a_prima prim = new a_prima();
 			return prim.method(this);
         }
+        public string f_complete()
+        {
+			f_complete comp = new f_complete();
+			return comp.f_comp(this);
+        }
+		public string f_connect()
+		{
+			f_connect comp = new f_connect();
+			return comp.f_con(this);
+		}
+		public string f_multi()
+        {
+			f_multi mult = new f_multi();
+			return mult.f_mul(this);
+        }
+		public string f_psevdo()
+		{
+			f_psevdo psev = new f_psevdo();
+			return psev.f_psev(this);
+		}
+		public string f_regular()
+		{
+			f_regular regul = new f_regular();
+			return regul.f_regul(this);
+		}
 	}
 }
