@@ -199,11 +199,6 @@ namespace Graph
 			f_hamiltonian ham = new f_hamiltonian();
 			return ham.hamiltonian(this);
 		}
-		public string f_complete_graph()
-		{
-			f_complete_graph com = new f_complete_graph();
-			return com.complete(this);
-		}
 		public string a_prima()
         {
 			a_prima prim = new a_prima();
@@ -233,6 +228,16 @@ namespace Graph
 		{
 			f_regular regul = new f_regular();
 			return regul.f_regul(this);
+		}
+		public string m_adtograph()
+		{
+			m_adtograph ad = new m_adtograph();
+			return ad.m_ad(this);
+		}
+		public string o_degree()
+		{
+			o_degree deg = new o_degree();
+			return deg.o_deg(this);
 		}
 	}
 }
