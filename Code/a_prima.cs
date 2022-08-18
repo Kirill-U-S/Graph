@@ -21,10 +21,14 @@ namespace Graph
             {
                 List<int> buf = new List<int>();
                 for (int j = 0; j < N; j++)
-                    buf = buf.Append(0).ToList();
-
+                    buf.Add(0);
                 arr = arr.Append(buf).ToList();
-                smezh = smezh.Append(buf).ToList();
+
+                List<int> _buf = new List<int>();
+                for (int j = 0; j < N; j++)
+                    _buf.Add(0);
+                smezh = smezh.Append(_buf).ToList();
+
                 versh = versh.Append(false).ToList();
             }
             #endregion
@@ -64,7 +68,7 @@ namespace Graph
                     versh[x] = false;
 
                 if (versh[x])
-                    sum++;
+                    sum+=arr[y][x];
                 output += $"Step {k}: edge {y} - {x}, weight {versh[x]}. sum: {sum}\n";
             }
             #endregion

@@ -8,18 +8,16 @@ namespace Graph
 {
     class a_dijkstra
     {
-		//TODO: данный способ работает (по крайней мере на одном примере) - я нахожу вообще все пути, но вопрос в том, что я немного не по алгоритму действую))
-		//ничего не возвращает, но изменяет arrpath который в общем смысле содержит все пути по окончании
 		public void a_dMethod(int V_O, int v, List<List<int>> arr, List<bool> versh, List<int> path, List<int> weigth_path, ref List<List<int>> arrpath)
 		{
-			path.Add(v);
+			path = path.Append(v).ToList();
 			versh[v] = true;
 
 			for (int i = 0; i < V_O; i++)
 			{
 				if (!versh[i] && arr[v][i] > 0)
 				{
-					weigth_path.Add(arr[v][i]);
+					weigth_path = weigth_path.Append(arr[v][i]).ToList();
 
 					a_dMethod(V_O, i, arr, versh, path, weigth_path, ref arrpath);
 				}
