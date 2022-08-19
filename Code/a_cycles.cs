@@ -53,7 +53,7 @@ namespace Graph
 			return 0;
 		}
 
-        void dfs(int u, List<List<int>> arr, List<int> path, List<bool> versh, int dlina, ref List<List<int>> arrpath, int N)
+        public void dfs(int u, List<List<int>> arr, List<int> path, List<bool> versh, int dlina, ref List<List<int>> arrpath, int N)
         {
             path = path.Append(u).ToList();  //вершина с которой мы работаем
             dlina++;
