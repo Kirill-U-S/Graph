@@ -249,5 +249,10 @@ namespace Graph
 			m_reachability reach = new m_reachability();
 			return reach.m_reach(this);
 		}
+		public string o_distances()
+		{
+			o_distances dis = new o_distances();
+			return dis.o_dis(this);
+		}
 	}
 }

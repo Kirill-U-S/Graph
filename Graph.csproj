@@ -61,6 +61,7 @@
     <Compile Include="Code\m_pq-adjacency.cs" />
     <Compile Include="Code\m_reachability.cs" />
     <Compile Include="Code\o_degree.cs" />
+    <Compile Include="Code\o_distances.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
