@@ -144,7 +144,12 @@ namespace Graph
 			a_cycles cycle = new a_cycles();
 			return cycle.dfs_cut(nach, v, N, path_dlina, arr);
         }
-        public string a_dijkstra()
+		//public int a_cycles_dfs(int u, List<List<int>> arr, List<int> path, List<bool> versh, int dlina, ref List<List<int>> arrpath, int N)
+		//{
+		//	a_cycles cycle = new a_cycles();
+		//	return cycle.dfs(u, arr, path, versh, dlina, ref arrpath, N);
+		//}
+		public string a_dijkstra()
         {
 			a_dijkstra ad = new a_dijkstra();
 			# region нужное-для-алгоритма
@@ -217,6 +222,16 @@ namespace Graph
 		{
 			o_degree deg = new o_degree();
 			return deg.o_deg(this);
+		}
+		public string m_reachability()
+		{
+			m_reachability reach = new m_reachability();
+			return reach.m_reach(this);
+		}
+		public string o_distances()
+		{
+			o_distances dis = new o_distances();
+			return dis.o_dis(this);
 		}
 	}
 }

@@ -11,6 +11,7 @@ namespace Graph
 		public string hamiltonian(Graph g)
 		{
 			int N = g.A.Count();
+			string output = "";
 			int dlina = 0;
 			bool flag = false;
 
@@ -58,12 +59,11 @@ namespace Graph
 			for (int i = 0; i < N; i++)
 			{
 				a_cycles humm = new a_cycles();
-				humm.dfs(i, arr, path, ref versh, ref dlina, ref arrpath, N);
+				humm.dfs(i, arr, path, versh, dlina, ref arrpath, N);
 			}
 			/*----------*/
 
 			/*-вывод-*/
-			string output = "";
 			for (int i = 0; i < arrpath.Count(); i++)
 			{
 				if (arrpath[i].Count() == N)
@@ -74,9 +74,9 @@ namespace Graph
 					
 			}
 			if (flag)
-				output += "graph is hamiltonian";
+				output = "graph is hamiltonian";
 			else
-				output += "graph is not hamiltonian";
+				output = "graph is not hamiltonian";
 			return output;
 		}
 	}

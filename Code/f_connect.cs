@@ -11,24 +11,45 @@ namespace Graph
     class f_connect
     {
         //связный ли граф
+        List<int> intermediate_for_reachability_f_connect(string m_reachi, int N)
+        {
+            List<int> matrix = new List<int>();
+            m_reachi = m_reachi.Replace(" ", "");
+            m_reachi = m_reachi.Replace("\n", "");
+            int ed = 0;
+
+            for (int i = 0; i < N; i++)
+                if (int.Parse(m_reachi[i].ToString()) != 0)
+                    ed++;
+
+            for (int i = 0; i < N; i++)
+            {
+                var buf = Enumerable.Repeat(0, N).ToList();
+                for (int j = 0; j < N; j++)
+                {
+                    buf[j] = int.Parse(m_reachi[i * N + j].ToString());
+                    matrix.Add(buf[j]);
+                }
+            }
+            return matrix;
+        }
         public string f_con(Graph g)
         {
             int N = g.A.Count();
-            List<List<int>> matrix = new List<List<int>>();
-            Graph a = new Graph(N);
-            a = g;
+            string output = "";
+            List<int> matrix = new List<int>();
+
+            m_reachability rea = new m_reachability();
+            matrix = intermediate_for_reachability_f_connect(rea.m_reach(g), N);
 
             /*int** matrix = reachability_m(a);*/  //переделать позже построение матрицы достижимости
             bool flag = true;
             for (int i = 0; i < N; i++)
             {
-                for (int j = 0; j < N; j++)
+                if (matrix[i] != 1)    //все элементы данной матрицы должны быть единицами по опр связного графа
                 {
-                    if (matrix[i][j] != 1)    //все элементы данной матрицы должны быть единицами по опр связного графа
-                    {
-                        flag = false;
-                        break;
-                    }
+                    flag = false;
+                    break;
                 }
             }
             if (flag)

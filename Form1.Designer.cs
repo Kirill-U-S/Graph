@@ -35,9 +35,10 @@ namespace Graph
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(248, 331);
+            this.button1.Location = new System.Drawing.Point(331, 407);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(322, 131);
+            this.button1.Size = new System.Drawing.Size(429, 161);
             this.button1.TabIndex = 0;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
@@ -46,21 +47,24 @@ namespace Graph
             // cmd
             // 
             this.cmd.AutoSize = true;
-            this.cmd.Location = new System.Drawing.Point(300, 9);
+            this.cmd.Location = new System.Drawing.Point(400, 11);
+            this.cmd.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.cmd.Name = "cmd";
-            this.cmd.Size = new System.Drawing.Size(35, 13);
+            this.cmd.Size = new System.Drawing.Size(46, 17);
             this.cmd.TabIndex = 1;
             this.cmd.Text = "label1";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(880, 497);
+            this.ClientSize = new System.Drawing.Size(1173, 612);
             this.Controls.Add(this.cmd);
             this.Controls.Add(this.button1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

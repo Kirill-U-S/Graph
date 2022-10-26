@@ -59,9 +59,6 @@ namespace Graph
             //----------
             Graph g = new Graph(N, a);
             Print(g, "A");
-
-            cmd.Text += g.a_cycles();
-            cmd.Text += "\nthe end";
             //cmd.Text += g.a_dijkstra();   //проверен на многих/выдает залупу-пупу - логичную, но не регулируемую (как и с циклами)
             //cmd.Text += g.a_kraskala();   //проверен на многих примерах
             //cmd.Text += g.f_multi();      //проверен на одном примере
@@ -74,5 +71,6 @@ namespace Graph
         {
             Example();
         }
+
     }
 }
