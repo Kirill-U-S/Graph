@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Graph
 {
+    //TODO: нихера не работает доработать/переделать
     class a_dijkstra
     {
 		public void a_dMethod(int V_O, int v, List<List<int>> arr, List<bool> versh, List<int> path, List<int> weigth_path, ref List<List<int>> arrpath)

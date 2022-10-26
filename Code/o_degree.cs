@@ -8,7 +8,8 @@ namespace Graph
 {
     class o_degree
     {
-        //вывод таблицы смежности для дополнения к графу
+        //просмотрено
+        //min max mid степени
         public string o_deg(Graph g)
         {
             int N = g.A.Count;

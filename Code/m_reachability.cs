@@ -9,6 +9,8 @@ namespace Graph
     class m_reachability
     {
         //построение таблицы достижимости
+        // Ремарка: чтобы использовать данный алгоритм в рамках другого алгоритма(f_connect), в том самом другом алгоритме нужно перевести с sting в list<<>>
+        // Либо Дописать здесь по аналогии с dfs_cut -- m_reach_cut
         public string m_reach(Graph g)
         {
             int N = g.A.Count;
@@ -36,7 +38,7 @@ namespace Graph
                 for (int j = 0; j < N; j++)
                 {
                     if (i == j)
-                        reachability[i][i] = 1;     //элементы на главной диагонали необходимо сделать единицами
+                        reachability[i][i] = 1;         //элементы на главной диагонали необходимо сделать единицами
                     else if (smezh[i][j] > 0)           //все единицы из таблицы смежности нужно добавить в новую матрицу
                         reachability[i][j] = reachability[j][i] = 1;
                     else

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Graph
 {
+    //просмотрено
     //TODO: данный отрезок кода требует m_reachability
     class f_connect
     {
@@ -17,7 +18,7 @@ namespace Graph
             Graph a = new Graph(N);
             a = g;
 
-            /*int** matrix = reachability_m(a);*/  //TODO: переделать позже построение матрицы достижимости
+            /*int** matrix = reachability_m(a);*/  //переделать позже построение матрицы достижимости
             bool flag = true;
             for (int i = 0; i < N; i++)
             {
@@ -31,9 +32,9 @@ namespace Graph
                 }
             }
             if (flag)
-                return "connected";
+                return "true";
             else
-                return "disconnected";
+                return "false";
         }
     }
 }

@@ -8,13 +8,13 @@ namespace Graph
 {
     class f_psevdo
     {
+        //просмотрено
         public string f_psev(Graph g)
         {
             int N = g.A.Count();
             List<List<int>> smezh = new List<List<int>>();
             bool multi = false;
             bool gd = false;
-
             #region инициализация
             for (int i = 0; i < N; i++)
             {
@@ -43,9 +43,9 @@ namespace Graph
                 }
             }
             if (multi && gd)
-                return "psevdograph";
+                return "true";
             else
-                return "not psevdograph";
+                return "false";
         }
     }
 }

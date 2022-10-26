@@ -97,66 +97,44 @@ namespace Graph
 					}
 				}
 			}
-
-			/*---TODO: на данный момент неясно, что мы будем окончательно использовать - List Е или Dictionary E---*/
-			/*---TODO: поэтому оставляю две версии, одну закоменченную, если тебя она будет интересовать ---*/
-			/*добавление Edges| массив Е здесь выступает как Dictionary*/
-			//E = new Dictionary<int, string>();
-			//for (int i = 0; i < V; i++)
-			//{
-			//	for (int j = i; j < V; j++)
-			//	{
-			//		if (A[i][j] != 0)
-			//		{
-			//			string buf = $"{i}{j}";
-			//			E.Add(i * V + j, buf);
-			//		}
-			//		if (A[j][i] != 0)
-			//		{
-			//			string buf = $"{j}{i}";
-			//			E.Add(j * V + i, buf);
-			//		}
-			//	}
-			//}
 		}
 		/*---обрубил данную реализацию до момента, когда мы наконец определимся с Е---*/
 		/*задание через <V, E>*/
-		//Graph(int V, int reb)
-		//{
-		//	for (int i = 0; i < V; i++)
-		//	{
-		//		List<int> buf = new List<int>();
-		//		for (int j = 0; j < reb; j++)
-		//		{
-		//			int w = 0;
-		//			//прилет данных std::cin >> w;
-		//			buf.Add(w);
-		//		}
-		//		D.Add(buf);
-		//	}
+		Graph(int V, int reb)
+		{
+			for (int i = 0; i < V; i++)
+			{
+				List<int> buf = new List<int>();
+				for (int j = 0; j < reb; j++)
+				{
+					int w = 0;
+					//прилет данных std::cin >> w;
+					buf.Add(w);
+				}
+				D.Add(buf);
+			}
+            for (int j = 0; j < reb; j++)
+            {
+                int p = 0;
+                int znach = 0;
+                for (int i = 0; i < V; i++)
+                {
+                    if (D[i][j] != 0)
+                    {
+                        p++;
+                        znach = D[i][j];
+                    }
+                }
+                if (p == 2)
+                    E.Add(znach.ToString());
+                //else if (p > 0 && p != 2)
+                //	вылет ошибкки std::cout << "ERROR: задание через <V, E>, ошибка в массиве\n"; TODO: try-catch
+            }
+        }
 
-		//	for (int j = 0; j < reb; j++)
-		//	{
-		//		int p = 0;
-		//		int znach = 0;
-		//		for (int i = 0; i < V; i++)
-		//		{
-		//			if (D[i][j] != 0)
-		//			{
-		//				p++;
-		//				znach = D[i][j];
-		//			}
-		//		}
-		//		if (p == 2)
-		//			E.Add(znach);
-		//		//else if (p > 0 && p != 2)
-		//		//	вылет ошибкки std::cout << "ERROR: задание через <V, E>, ошибка в массиве\n";
-		//	}
-		//}
+        /*----------алгоритмы----------*/
 
-		/*----------алгоритмы----------*/
-
-		public string a_cycles()
+        public string a_cycles()
         {
 			a_cycles cycle = new a_cycles();
 			return cycle.to_dfs(this);
@@ -196,8 +174,9 @@ namespace Graph
         }
 		public string f_hamiltonian()
 		{
-			f_hamiltonian ham = new f_hamiltonian();
-			return ham.hamiltonian(this);
+			//f_hamiltonian ham = new f_hamiltonian(); TODO: дописать f_hamiltonian
+			//return ham.hamiltonian(this);
+			return "жижа";
 		}
 		public string a_prima()
         {

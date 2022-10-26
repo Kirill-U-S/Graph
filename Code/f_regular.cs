@@ -8,6 +8,7 @@ namespace Graph
 {
     class f_regular
     {
+		//просмотрено
 		//регул¤рный ли граф(все вершины имеют одинаковую степень)
 		public string f_regul(Graph g)
 		{
@@ -48,9 +49,9 @@ namespace Graph
 				}
 			}
 			if (flag > 0)
-				return "regular";
+				return "true";
 			else
-				return "unregular";
+				return "false";
 		}
 
 	}

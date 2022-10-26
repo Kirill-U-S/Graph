@@ -8,12 +8,12 @@ namespace Graph
 {
     class f_complete
     {
+        //TODO: доработать для орграфа | (51 строка)
         //полный или сильносвязный граф(между любыми двумя вершинами должно быть одно ребро)
         public string f_comp(Graph g)
         {
             int N = g.A.Count();
             bool ed = true;
-
             List<List<int>> smezh = new List<List<int>>();
             #region инициализация
             for (int i = 0; i < N; i++)
@@ -39,8 +39,8 @@ namespace Graph
                     {
 
                     }
-                    else if (i != j)                 //всё кроме главной диагонали должно быть в единицах,
-                    {                           //поэтому смотрим на все элементы кроме диагональных
+                    else if (i != j)                //всё кроме главной диагонали должно быть в единицах,
+                    {                               //поэтому смотрим на все элементы кроме диагональных
                         if (smezh[i][j] != 1)
                             ed = false;
                     }
@@ -48,9 +48,9 @@ namespace Graph
             }
 
             if (ed)
-                return "complete";   //если для орграфа, то strongly connected
+                return "true";   //если для орграфа, то strongly connected(в дальнейшем просмотреть здесь)
             else
-                return "incomplete";
+                return "false";
         }
 
     }

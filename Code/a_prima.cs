@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Graph
 {
+    //проверено
     class a_prima
     {
         public string method(Graph g)

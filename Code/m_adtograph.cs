@@ -8,7 +8,8 @@ namespace Graph
 {
     class m_adtograph
     {
-        //вывод таблицы смежности для дополнения к графу
+        //просмотрено
+        //таблица смежности для дополнения к графу
         public string m_ad(Graph g)
         {
             int N = g.A.Count;

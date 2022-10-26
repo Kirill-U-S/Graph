@@ -8,28 +8,10 @@ namespace Graph
 {
     class a_kraskala
     {
+        //проверено |при последне проверке убран пример|
         public string a_kraskal(Graph g)
         {
             int N = g.A.Count();
-            #region пример
-            //const int N = 10;
-            //int smezh[N][N] =
-            //{
-            //    { 0,10,0,0,20,0,0,15,0,0},
-            //    { 10,0,5,0,0,0,0,2,8,9},
-            //    { 0,5,0,16,0,0,0,0,4,0},
-            //    { 0,0,16,0,28,25,0,0,11,9},
-            //    { 20,0,0,28,0,15,0,0,0,0},
-            //    { 0,0,0,25,15,0,10,0,7,5},
-            //    { 0,0,0,0,0,10,0,11,0,3},
-            //    { 15,2,0,0,0,0,11,0,4,14},
-            //    { 0,8,4,11,0,7,0,4,0,0},
-            //    { 0,9,0,9,0,5,3,14,0,0}
-            //};
-            //string smezh = "0 10 0 0 20 0 0 15 0 0  10 0 5 0 0 0 0 2 8 9  0 5 0 16 0 0 0 0 4 0  0 0 16 0 28 25 0 0 11 9  20 0 0 28 0 15 0 0 0 0
-            //                0 0 0 25 15 0 10 0 7 5  0 0 0 0 0 10 0 11 0 3  15 2 0 0 0 0 11 0 4 14  0 8 4 11 0 7 0 4 0 0  0 9 0 9 0 5 3 14 0 0 "
-            #endregion
-            //создание
             string output = "";
             int sum = 0;
             int min = int.MaxValue;
@@ -37,7 +19,6 @@ namespace Graph
             List<int> versh = new List<int>();
             List<List<int>> vert = new List<List<int>>();
             List<List<int>> buf = new List<List<int>>();
-            //--------
             #region-инициализация-
             for (int i = 0; i < N; i++)
             {
@@ -57,8 +38,8 @@ namespace Graph
                 }
             }
             #endregion
+            
             minn.Sort();
-
             for (int z = 0; z < minn.Count(); z++)
             {
                 for (int i = 0; i < N; i++)

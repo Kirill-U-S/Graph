@@ -8,6 +8,7 @@ namespace Graph
 {
     class f_multi
     {
+        //проверено
         //является ли мультиграфом
         public string f_mul(Graph g)
         {
@@ -15,7 +16,6 @@ namespace Graph
             List<List<int>> smezh = new List<List<int>>();
             bool multi = false;
             bool gd = true;
-
             #region инициализация
             for (int i = 0; i < N; i++)
             {
@@ -43,9 +43,9 @@ namespace Graph
                 }
             }
             if (multi && gd)
-                return "multigraph";
+                return "true";
             else
-                return "not multi";
+                return "false";
         }
 
     }
