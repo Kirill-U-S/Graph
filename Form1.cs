@@ -15,6 +15,7 @@ namespace Graph
         Graph g;
         public int Selected { get; set; }
         public int Transform { get; set; }
+        List<TextBox> Arr;
         public Form1()
         {
             InitializeComponent();
@@ -22,6 +23,7 @@ namespace Graph
             Transform = 0;
             cmd.Text = "";
             L_ArrayOfA.Text = "";
+            Arr = new List<TextBox>();
         }
         /// <summary>
         /// Выводит в текстовом виде массив графа
@@ -138,6 +140,125 @@ namespace Graph
                     break;
             }
         }
+
+        /// <summary>
+        /// Создает матрицу из текстбоксов посередине экрана
+        /// </summary>
+        /// <param name="n">размер</param>
+        void Render(int n)// size
+        {
+            Delete();
+
+            int X = (this.Size.Width / 2) - 15, Y = this.Size.Height / 2 - 11;//изначальная позиция
+            int l, x, y;
+            int kx = 26, ky = 22;//коэффициенты сдвига 10 6
+            int TextBox_X = 24, TextBox_Y = 16;// 6
+            //сдвиг на 0 уровень
+            if ((n % 2) == 0)
+            {
+                x = Convert.ToInt32(Convert.ToDouble(X) - 1.0 / 2.0 * Convert.ToDouble(kx));
+                y = Convert.ToInt32(Convert.ToDouble(Y) - 1.0 / 2.0 * Convert.ToDouble(ky));
+                l = -1;//количество шагов для одной стороны
+                for (int k = 1; k <= n / 2; k++)
+                {
+                    l += 2;//шаг увеличивается на два (прибавление с каждой стороны)
+
+                    //внутренний цикл отвечает за каждый отдельный шаг
+                    for (int i = 1; i <= 4 * l; i++)
+                    {
+                        Arr.Add(new TextBox()
+                        {
+                            Text = "0",
+                            Location = new Point(x, y),
+                            Size = new Size(TextBox_X, TextBox_Y)
+                        });
+
+                        this.Controls.Add(Arr[Arr.Count - 1]);
+                        if (i <= l || (2 * l < i && i <= 3 * l))//if отлавливает моменты когда не должен меняться x или y
+                        {                                       //внутренний if отвечает за направление обхода
+                            //x - не меняется
+                            if (i <= l)
+                                y += ky;
+                            else
+                                y -= ky;
+                        }
+                        else if ((i > l && i <= 2 * l) || (i > 3 * l && i <= 4 * l))
+                        {
+                            //y - не меняется
+                            if (i <= 2 * l && i >= l)
+                                x += kx;
+                            else
+                                x -= kx;
+                        }
+                    }
+
+                    //сдвиг на новый уровень
+                    x -= kx;
+                    y -= ky;
+                }
+            }
+            else
+            {
+                x = X - kx;
+                y = Y - ky;
+                l = 0;//количество шагов для одной стороны
+                Arr.Add(new TextBox() { 
+                    Text = "0",
+                    Location = new Point(X, Y),
+                    Size = new Size(TextBox_X, TextBox_Y)
+                });
+                this.Controls.Add(Arr[0]);
+                for (int k = 1; k <= (n - 1) / 2; k++)
+                {
+                    l += 2;//шаг увеличивается на два (прибавление с каждой стороны)
+                           //внутренний цикл отвечает за каждый отдельный шаг
+                    for (int i = 1; i <= 4 * l; i++)
+                    {
+                        Arr.Add(new TextBox()
+                        {
+                            Text = "0",
+                            Location = new Point(x, y),
+                            Size = new Size(TextBox_X, TextBox_Y)
+                        });
+                        this.Controls.Add(Arr[Arr.Count - 1]);
+                        if (i <= l || (2 * l < i && i <= 3 * l))//if отлавливает моменты когда не должен меняться x или y
+                        {                                       //внутренний if отвечает за направление обхода
+                            //x - не меняется
+                            if (i <= l)
+                                y += ky;
+                            else
+                                y -= ky;
+                        }
+                        else if ((i > l && i <= 2 * l) || (i > 3 * l && i <= 4 * l))
+                        {
+                            //y - не меняется
+                            if (i <= 2 * l && i >= l)
+                                x += kx;
+                            else
+                                x -= kx;
+                        }
+                    }
+
+                    //сдвиг на новый уровень
+                    x -= kx;
+                    y -= ky;
+                }
+            }
+        }
+        /// <summary>
+        /// данный метод идет в паре с Render и удаляет текстбоксы созданные в Render
+        /// </summary>
+        void Delete()
+        {
+            for (int i = 0; i < Arr.Count; i++)
+            {
+                //Arr[i].Controls.Remove(Arr[i]);
+                
+                Arr[i].Dispose();
+            }
+            Arr.Clear();
+            //Arr = new List<TextBox>();
+        }
         private void B_Out_Click(object sender, EventArgs e)
         {
             Example_Out(Selected);
@@ -155,6 +276,17 @@ namespace Graph
         private void CB_Transform_SelectedIndexChanged(object sender, EventArgs e)
         {
             Transform = CB_Transform.SelectedIndex + 1;
+        }
+
+        private void B_SetScale_Click(object sender, EventArgs e)
+        {
+            if(int.TryParse(CB_Scale.Text, out int n))
+                Render(n);
+        }
+
+        private void B_Delete_Click(object sender, EventArgs e)
+        {
+            Delete();
         }
     }
 }
